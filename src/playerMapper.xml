@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.scit.tama.dao.PlayerMapper">
+    <insert id="playerInput" parameterType="Player">
+        INSERT INTO PLAYER
+        VALUES (#{playerId},#{playerPwd})
+    </insert>
+
+    <select id="findById" parameterType="String" resultType="Player">
+        SELECT * FROM PLAYER
+        WHERE playerId = #{playerId}
+    </select>
+
+    <select id="findByPwd" parameterType="String" resultType="Player">
+        SELECT * FROM PLAYER
+        WHERE playerPwd = #{playerPwd}
+    </select>
+</mapper>
