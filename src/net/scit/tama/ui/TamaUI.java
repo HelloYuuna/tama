@@ -38,7 +38,7 @@ public class TamaUI {
                     System.exit(0);
                     break;
                 default:
-                    System.out.println("잘못된 선택이예요! 메뉴를 선택해주세요~");
+                    System.out.println("잘못된 선택이예요! 메뉴를 다시 선택해주세요~");
             }
         }
     }
@@ -114,8 +114,40 @@ public class TamaUI {
         }
 
         // 타마 생활 시작
-        // coding here
+        while(true) {
+            activityMenu();
+            select = keyin.next();
 
+            switch (select) {
+                case "1":
+                    feed(); break;
+                case "2":
+                    walk(); break;
+                case "3":
+                    clinic(); break;
+                case "4":
+                    condition(); break;
+                case "5":
+                    System.out.println("내일 또 만나요~");
+                    System.exit(0);
+                default:
+                    System.out.println("잘못된 선택이예요! 메뉴를 다시 선택해주세요~");
+            }
+
+        }
+
+    }
+
+    private void activityMenu() {
+        System.out.println("☆.。.:*°☆.。☆.。.:*°☆.。☆.。");
+        System.out.println("     A C T I V I T Y");
+        System.out.println("     ① 먹이 주기");
+        System.out.println("     ② 산책 가기");
+        System.out.println("     ③ 병원 가기");
+        System.out.println("     ④ 상태 확인하기");
+        System.out.println("     ⑤ 내일 만나기");
+        System.out.println("☆.。.:*°☆.。☆.。.:*°☆.。☆.。");
+        System.out.print("   메뉴를 선택해 주세요: ");
     }
 
     /**
