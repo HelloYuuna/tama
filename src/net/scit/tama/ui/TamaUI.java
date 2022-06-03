@@ -131,24 +131,23 @@ public class TamaUI {
         System.out.println("\t----------------------------------------------");
         System.out.println("\t" + animalInfo);
         System.out.println("\t----------------------------------------------");
-        System.out.println(animalInfo.getAnimalName() + "과 계속 함께 하시겠어요?");
-        System.out.println("\t 1)네! 함께할래요~ 2)아니요 오늘은 그만할래요");
-        select = keyin.next();
+        System.out.println("\t" + animalInfo.getAnimalName() + "과 계속 함께 하시겠어요?");
 
-        switch (select) {
-            case "1":
-                System.out.println("오늘도 " + animalInfo.getAnimalName() + "과 함께 놀아볼까요!?");
-                break;
-            case "2":
-                System.out.println("초기메뉴로 돌아갈께요!");
-                start();
-                break;
-        }
+        while (true) {
+            System.out.println("\t1)네! 함께할래요~ 2)아니요 오늘은 그만할래요");
+            System.out.print("\t선택: ");
+            select = keyin.next();
 
+            switch (select) {
+                case "1":
+                    System.out.println("오늘도 " + animalInfo.getAnimalName() + "랑 함께 놀아볼까요!?");
+                    break;
+                case "2":
+                    System.out.println("초기메뉴로 돌아갈께요!");
+                    start();
+            }
 
-
-        // 타마 생활 시작
-        while(true) {
+            // 타마 생활 시작
             activityMenu();
             select = keyin.next();
 
@@ -254,7 +253,7 @@ public class TamaUI {
                 start();
             }
 
-            System.out.println("자, 이제 당신의 " + type + " " + name + "과(와) 함께 놀아볼까요?");
+            System.out.println("자, 이제 당신의 " + type + " " + name + "랑   함께 놀아볼까요?");
             // 타마 월드로 돌아감
             return;
         }
