@@ -23,6 +23,16 @@ public class TamaUI {
         start();
     }
 
+    private void menu() {
+        System.out.println("☆.。.:*°☆.。☆.。.:*°☆.。☆.。");
+        System.out.println("     T   A   M   A");
+        System.out.println("     ① 회원가입");
+        System.out.println("     ② 로그인");
+        System.out.println("     ③ 종료");
+        System.out.println("☆.。.:*°☆.。☆.。.:*°☆.。☆.。");
+        System.out.print("   메뉴를 선택해 주세요: ");
+    }
+
     public void start() {
         while (true) {
             menu();
@@ -87,13 +97,15 @@ public class TamaUI {
 
     }
 
-    private void menu() {
-        System.out.println("☆.。.:*°☆.。☆.。.:*°☆.。☆.。");
-        System.out.println("     T   A   M   A");
-        System.out.println("     ① 회원가입");
-        System.out.println("     ② 로그인");
-        System.out.println("     ③ 종료");
-        System.out.println("☆.。.:*°☆.。☆.。.:*°☆.。☆.。");
+    private void activityMenu() {
+        System.out.println("☆.。.:*°☆.。☆.。.:*°☆.。☆.。.☆");
+        System.out.println("     A C T I V I T Y");
+        System.out.println("     ① 먹이 주기");
+        System.out.println("     ② 산책 가기");
+        System.out.println("     ③ 병원 가기");
+        System.out.println("     ④ 상태 확인하기");
+        System.out.println("     ⑤ 내일 만나기");
+        System.out.println("☆.。.:*°☆.。☆.。.:*°☆.。☆.。.☆");
         System.out.print("   메뉴를 선택해 주세요: ");
     }
 
@@ -106,12 +118,34 @@ public class TamaUI {
         System.out.println("\n\n\t\\( > ㅅ < )/ WELECOME TO TAMA WORLD ☆.。.:*°☆.。");
         System.out.println("\t타마짱은 당신의 관심을 받고 자라납니다~");
 
-        // findById로 AnimalInfo 가져옴
+        // 타마 생성 (findById로 AnimalInfo 가져옴)
         AnimalInfo animalInfo = animalInfoDAO.selectAnimalInfo(playerId);
         if(animalInfo == null) {
             System.out.println("\t아직 등록된 타마가 없는것 같군요! 새로운 타마를 만나러 떠나볼까요?");
             makeTama(playerId);
         }
+
+        // 타마 이어하기
+        System.out.println("\n\t----------------------------------------------");
+        System.out.println("\t                현재 성장중인 타마");
+        System.out.println("\t----------------------------------------------");
+        System.out.println("\t" + animalInfo);
+        System.out.println("\t----------------------------------------------");
+        System.out.println(animalInfo.getAnimalName() + "과 계속 함께 하시겠어요?");
+        System.out.println("\t 1)네! 함께할래요~ 2)아니요 오늘은 그만할래요");
+        select = keyin.next();
+
+        switch (select) {
+            case "1":
+                System.out.println("오늘도 " + animalInfo.getAnimalName() + "과 함께 놀아볼까요!?");
+                break;
+            case "2":
+                System.out.println("초기메뉴로 돌아갈께요!");
+                start();
+                break;
+        }
+
+
 
         // 타마 생활 시작
         while(true) {
@@ -129,7 +163,7 @@ public class TamaUI {
                     condition(); break;
                 case "5":
                     System.out.println("내일 또 만나요~");
-                    System.exit(0);
+                    System.exit(0); break;
                 default:
                     System.out.println("잘못된 선택이예요! 메뉴를 다시 선택해주세요~");
             }
@@ -138,16 +172,29 @@ public class TamaUI {
 
     }
 
-    private void activityMenu() {
-        System.out.println("☆.。.:*°☆.。☆.。.:*°☆.。☆.。");
-        System.out.println("     A C T I V I T Y");
-        System.out.println("     ① 먹이 주기");
-        System.out.println("     ② 산책 가기");
-        System.out.println("     ③ 병원 가기");
-        System.out.println("     ④ 상태 확인하기");
-        System.out.println("     ⑤ 내일 만나기");
-        System.out.println("☆.。.:*°☆.。☆.。.:*°☆.。☆.。");
-        System.out.print("   메뉴를 선택해 주세요: ");
+    /**
+     * 현재 상태 체크
+     */
+    private void condition() {
+    }
+
+    /**
+     * 병원가기
+     */
+    private void clinic() {
+
+    }
+
+    /**
+     * 산책하기
+     */
+    private void walk() {
+    }
+
+    /**
+     * 먹이주기
+     */
+    private void feed() {
     }
 
     /**
@@ -155,7 +202,7 @@ public class TamaUI {
      * @param playerId 플레이어 아이디 FK로 타마를 생성
      */
     private void makeTama(String playerId) {
-        System.out.println("\n\n\t당신의 소중한 타마의 종류를 골라주세요");
+        System.out.println("\n\n\t당신의 소중한 타마의 종류를 골라주세요~");
 
         AnimalInfo createAnimal = new AnimalInfo();
         createAnimal.setPlayerId(playerId);
@@ -204,10 +251,10 @@ public class TamaUI {
 
             if(result != 1) {
                 System.out.println("알 수 없는 외부의 힘이 작용했어요..! \n자세한 사항은 관리자에게 문의해주세요");
-                menu();
+                start();
             }
 
-            System.out.println("자, 이제 타마를 키우러 가볼까요?");
+            System.out.println("자, 이제 당신의 " + type + " " + name + "과(와) 함께 놀아볼까요?");
             // 타마 월드로 돌아감
             return;
         }

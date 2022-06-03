@@ -86,14 +86,6 @@ public class AnimalInfo {
 
     @Override
     public String toString() {
-        return "AnimalInfo{" +
-                "animalSeq=" + animalSeq +
-                ", typeSeq=" + typeSeq +
-                ", playerId='" + playerId + '\'' +
-                ", birth='" + birth + '\'' +
-                ", animal_name='" + animalName + '\'' +
-                ", condition='" + condition + '\'' +
-                ", money=" + money +
-                '}';
+        return String.format("%s  태어난날:%s, 상태:%s, 소지금:%,d원", animalName, birth, condition, money);
     }
 }

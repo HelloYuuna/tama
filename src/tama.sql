@@ -52,3 +52,54 @@ create table food (
                       price number NOT NULL
 );
 create sequence food_seq;
+
+select * from ANIMAL_INFO;
+update ANIMAL_INFO
+set animalName = '콩이'
+where playerId = 'tama1';
+commit;
+
+insert into food (foodSeq, typeSeq, foodName, price)
+VALUES (food_seq.nextval, 1, '해바라기씨', 20);
+
+insert into food (foodSeq, typeSeq, foodName, price)
+VALUES (food_seq.nextval, 1, '기장', 10);
+
+insert into food (foodSeq, typeSeq, foodName, price)
+VALUES (food_seq.nextval, 1, '쌀밥', 30);
+
+insert into food (foodSeq, typeSeq, foodName, price)
+VALUES (food_seq.nextval, 1, '홍화씨', 50);
+
+insert into food (foodSeq, typeSeq, foodName, price)
+VALUES (food_seq.nextval, 1, '바나나', 100);
+
+insert into food (foodSeq, typeSeq, foodName, price)
+VALUES (food_seq.nextval, 2, '딸기', 70);
+
+insert into food (foodSeq, typeSeq, foodName, price)
+VALUES (food_seq.nextval, 2, '감말랭이', 30);
+
+insert into food (foodSeq, typeSeq, foodName, price)
+VALUES (food_seq.nextval, 2, '저키', 50);
+
+insert into food (foodSeq, typeSeq, foodName, price)
+VALUES (food_seq.nextval, 2, '강아지용 습신캔', 150);
+
+insert into food (foodSeq, typeSeq, foodName, price)
+VALUES (food_seq.nextval, 2, '강아지용 건식사료', 100);
+
+insert into food (foodSeq, typeSeq, foodName, price)
+VALUES (food_seq.nextval, 3, '츄르', 10);
+
+insert into food (foodSeq, typeSeq, foodName, price)
+VALUES (food_seq.nextval, 3, '닭가슴살(생식)', 80);
+
+insert into food (foodSeq, typeSeq, foodName, price)
+VALUES (food_seq.nextval, 3, '북어트릿', 20);
+
+insert into food (foodSeq, typeSeq, foodName, price)
+VALUES (food_seq.nextval, 3, '고양이용 습식캔', 150);
+
+insert into food (foodSeq, typeSeq, foodName, price)
+VALUES (food_seq.nextval, 3, '고양이용 건식사료', 100);

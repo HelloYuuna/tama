@@ -5,7 +5,8 @@
 
 <mapper namespace="net.scit.tama.dao.AnimalInfoMapper">
     <select id="selectAnimalInfo" parameterType="String" resultType="AnimalInfo">
-        SELECT * FROM ANIMAL_INFO
+        SELECT ANIMALNAME, to_char(BIRTH,'YYYY-MM-DD') as BIRTH, trunc(sysdate-BIRTH) || '일 성장중' as 성장일, CONDITION, MONEY
+        FROM ANIMAL_INFO
         WHERE playerId = #{playerId}
     </select>
 
