@@ -20,4 +20,7 @@ public interface AnimalInfoMapper {
 
     // 새로운 타마 등록
     int tamainput(AnimalInfo createAnimal);
+
+    // 산책으로 돈 얻기
+    int updateMoneyByWalk(AnimalInfo animalInfo);
 }

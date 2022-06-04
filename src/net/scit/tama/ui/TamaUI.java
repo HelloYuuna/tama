@@ -5,6 +5,7 @@ import net.scit.tama.dao.PlayerDAO;
 import net.scit.tama.vo.AnimalInfo;
 import net.scit.tama.vo.Player;
 
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -48,7 +49,7 @@ public class TamaUI {
                     System.exit(0);
                     break;
                 default:
-                    System.out.println("잘못된 선택이예요! 메뉴를 다시 선택해주세요~");
+                    System.out.println("\t잘못된 선택이예요! 메뉴를 다시 선택해주세요~");
             }
         }
     }
@@ -65,10 +66,10 @@ public class TamaUI {
         Player player = new Player(playerId, playerPwd);
         int result = playerDao.playerInput(player);
         if(result != 1) {
-            System.out.println("등록에 실패했어요 ㅠㅠ");
+            System.out.println("\t등록에 실패했어요 ㅠㅠ \n관리자에게 문의를 해보아요");
         }
 
-        System.out.println("새로운 타마를 만날 준비가 되었군요!");
+        System.out.println("\n\t새로운 타마를 만날 준비가 되었군요!");
         intoTamaWorld(playerId); // 타마월드 입성
     }
 
@@ -79,7 +80,7 @@ public class TamaUI {
         Player player = playerDao.findById(playerId);
 
         if (player == null) {
-            System.out.println("등록되지 않는 회원이예요! 등록을 먼저 진행해주세요 :)");
+            System.out.println("\t등록되지 않는 회원이예요! 등록을 먼저 진행해주세요 :)");
             playerInput();
         }
 
@@ -115,22 +116,25 @@ public class TamaUI {
      * @param playerId 플레이어 아이디로 타마를 찾음
      */
     private void intoTamaWorld(String playerId) {
-        System.out.println("\n\n\t\\( > ㅅ < )/ WELECOME TO TAMA WORLD ☆.。.:*°☆.。");
+        System.out.println("\n\t\\( > ㅅ < )/ WELECOME TO TAMA WORLD ☆.。.:*°☆.。");
         System.out.println("\t타마짱은 당신의 관심을 받고 자라납니다~");
 
         // 타마 생성 (findById로 AnimalInfo 가져옴)
         AnimalInfo animalInfo = animalInfoDAO.selectAnimalInfo(playerId);
         if(animalInfo == null) {
-            System.out.println("\t아직 등록된 타마가 없는것 같군요! 새로운 타마를 만나러 떠나볼까요?");
+            System.out.println("\n\n\t아직 등록된 타마가 없는것 같군요! \n\t새로운 타마를 만나러 떠나볼까요?");
             makeTama(playerId);
+            animalInfo = animalInfoDAO.selectAnimalInfo(playerId);                      // 데이터베이스의 default값 가져옴
         }
+
+        animalInfo.setPlayerId(playerId);                                              //  아이디null 값
 
         // 타마 이어하기
         System.out.println("\n\t----------------------------------------------");
         System.out.println("\t                현재 성장중인 타마");
-        System.out.println("\t----------------------------------------------");
+        System.out.println("\t------------------------------------------------");
         System.out.println("\t" + animalInfo);
-        System.out.println("\t----------------------------------------------");
+        System.out.println("\t------------------------------------------------");
         System.out.println("\t" + animalInfo.getAnimalName() + "과 계속 함께 하시겠어요?");
 
         while (true) {
@@ -138,15 +142,15 @@ public class TamaUI {
             System.out.print("\t선택: ");
             select = keyin.next();
 
-            switch (select) {
-                case "1":
-                    System.out.println("오늘도 " + animalInfo.getAnimalName() + "랑 함께 놀아볼까요!?");
-                    break;
-                case "2":
-                    System.out.println("초기메뉴로 돌아갈께요!");
-                    start();
+            if ("1".equals(select)) {
+                System.out.println("\t오늘도 " + animalInfo.getAnimalName() + "랑 함께 놀아볼까요!?");
+                break;
+            } else if ("2".equals(select)) {
+                System.out.println("\n\t초기메뉴로 돌아갈께요!\n");
+                start();
             }
-
+        }
+        while (true) {
             // 타마 생활 시작
             activityMenu();
             select = keyin.next();
@@ -155,7 +159,7 @@ public class TamaUI {
                 case "1":
                     feed(); break;
                 case "2":
-                    walk(); break;
+                    walk(animalInfo); break;
                 case "3":
                     clinic(); break;
                 case "4":
@@ -175,6 +179,7 @@ public class TamaUI {
      * 현재 상태 체크
      */
     private void condition() {
+
     }
 
     /**
@@ -187,7 +192,50 @@ public class TamaUI {
     /**
      * 산책하기
      */
-    private void walk() {
+    private void walk(AnimalInfo animalInfo) {
+        System.out.println("\n\n\t" + animalInfo.getAnimalName() + "과 즐거운 산책을 떠나보아요!");
+
+        while (true) {
+            System.out.println("\t산책 코스를 골라주세요!");
+            System.out.println("\t1)공원 2)한강 3)등산");
+            System.out.print("\t선택: ");
+            select = keyin.next();
+
+            switch (select) {
+                case "1":
+                    System.out.println("\n\t당신은" + animalInfo.getAnimalName() + "랑 공원에서 즐거운 산책중인데… ");
+                    break;
+                case "2":
+                    System.out.println("\n\t당신은" + animalInfo.getAnimalName() + "랑 한강에서 행복한 산책중인데…");
+                    break;
+                case "3":
+                    System.out.println("\n\t당신은" + animalInfo.getAnimalName() + "랑 힘겨운 등반중에 있는데… ");
+                    break;
+                default:
+                    System.out.println("\n\t잘못된 선택이예요! 메뉴를 다시 선택해주세요~");
+                    continue;
+            }
+
+            // sleep 사용해서 천천히 ... 이 떨어지게
+
+            Random random = new Random();
+            char randomtxt = (char) (random.nextInt(26) + 'a'); // a + 26까지
+//            System.out.println("Generated Random Character: " + randomtxt);
+
+            int money;
+            if(randomtxt == 'a' || randomtxt == 'b' || randomtxt == 'c' ) {
+                System.out.println("\n\t두둥! 500원을 발견했습니다!!!");
+                money = 500;
+            } else {
+                System.out.println("\n\t어머나! 여기에 돈이? 50원을 주었습니다!");
+                money = 50;
+            }
+            animalInfo.setMoney(animalInfo.getMoney()+money);
+            animalInfoDAO.updateMoneyByWalk(animalInfo);
+            System.out.println("\t당신은 행복한 마음으로 " + animalInfo.getAnimalName() + "와 함께 집으로 돌아갑니다~");
+            return;
+        }
+
     }
 
     /**
@@ -211,49 +259,45 @@ public class TamaUI {
             select = keyin.next();
             switch (select) {
                 case "1":
-                    System.out.println("당신은 화려한 무늬의 앵무새 알을 발견했습니다!!!");
+                    System.out.println("\n\t당신은 화려한 무늬의 앵무새 알을 발견했습니다!!!");
                     // 텍스이미지 띄우기
                     createAnimal.setTypeSeq(1);
                     break;
                 case "2":
-                    System.out.println("당신은 사랑스러운 댕댕이를 구조했습니다!!!");
+                    System.out.println("\n\t당신은 사랑스러운 댕댕이를 구조했습니다!!!");
                     createAnimal.setTypeSeq(2);
                     break;
                 case "3":
-                    System.out.println("당신은 신비스러운 고양이에게 간택당했습니다!!!");
+                    System.out.println("\n\t당신은 신비스러운 고양이에게 간택당했습니다!!!");
                     createAnimal.setTypeSeq(2);
                     break;
                 default:
-                    System.out.println("다른 종류는 준비중이예요 :) \n1~3번 사이에서 골라주세요!");
+                    System.out.println("\n\t다른 종류는 준비중이예요 :) \n1~3번 사이에서 골라주세요!");
                     continue;
             }
 
             String type = null;
-            switch (select) {
-                case "1":
-                    type = "화려한";
-                    break;
-                case "2":
-                    type = "사랑스러운";
-                    break;
-                case "3":
-                    type = "신비스러운";
-                    break;
+            if ("1".equals(select)) {
+                type = "화려한";
+            } else if ("2".equals(select)) {
+                type = "사랑스러운";
+            } else if ("3".equals(select)) {
+                type = "신비스러운";
             }
 
-            System.out.println("당신의" +  type + " 타마의 이름을 지어주세요");
-            System.out.println("수정할 수 없으니 신중하게 지어주세요");
-            System.out.print("타마 이름: ");
+            System.out.println("\n\t당신의 " +  type + " 타마의 이름을 지어주세요");
+            System.out.println("\t수정할 수 없으니 신중하게 지어주세요");
+            System.out.print("\t타마 이름: ");
             String name = keyin.next();
             createAnimal.setAnimalName(name);
             int result = animalInfoDAO.tamainput(createAnimal);
 
             if(result != 1) {
-                System.out.println("알 수 없는 외부의 힘이 작용했어요..! \n자세한 사항은 관리자에게 문의해주세요");
+                System.out.println("\t알 수 없는 외부의 힘이 작용했어요..! \n자세한 사항은 관리자에게 문의해주세요");
                 start();
             }
 
-            System.out.println("자, 이제 당신의 " + type + " " + name + "랑   함께 놀아볼까요?");
+            System.out.println("\t자, 이제 당신의 " + type + " " + name + "랑 함께 놀아볼까요?");
             // 타마 월드로 돌아감
             return;
         }

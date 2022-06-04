@@ -54,10 +54,6 @@ create table food (
 create sequence food_seq;
 
 select * from ANIMAL_INFO;
-update ANIMAL_INFO
-set animalName = '콩이'
-where playerId = 'tama1';
-commit;
 
 insert into food (foodSeq, typeSeq, foodName, price)
 VALUES (food_seq.nextval, 1, '해바라기씨', 20);

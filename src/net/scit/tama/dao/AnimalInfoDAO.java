@@ -28,7 +28,6 @@ public class AnimalInfoDAO {
         AnimalInfoMapper mapper = session.getMapper(AnimalInfoMapper.class);
 
         int result = mapper.tamainput(createAnimal);
-
         if(result == 1) {
             session.commit();
             return 1;
@@ -36,5 +35,18 @@ public class AnimalInfoDAO {
 
         session.rollback();
         return 0;
+    }
+
+    public void updateMoneyByWalk(AnimalInfo animalInfo) {
+        SqlSession session = factory.openSession();
+        AnimalInfoMapper mapper = session.getMapper(AnimalInfoMapper.class);
+
+        int result = mapper.updateMoneyByWalk(animalInfo);
+        if(result == 1) {
+            session.commit();
+            return;
+        }
+
+        session.rollback();
     }
 }

@@ -14,4 +14,10 @@
         INSERT INTO ANIMAL_INFO (ANIMALSEQ, PLAYERID, TYPESEQ, ANIMALNAME)
         VALUES (animal_seq.nextval, #{playerId}, #{typeSeq}, #{animalName})
     </insert>
+
+    <update id="updateMoneyByWalk" parameterType="AnimalInfo">
+        UPDATE ANIMAL_INFO
+        SET MONEY = #{money}
+        WHERE PLAYERID = #{playerId}
+    </update>
 </mapper>
