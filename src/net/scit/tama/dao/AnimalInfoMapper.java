@@ -24,5 +24,15 @@ public interface AnimalInfoMapper {
     // 산책으로 돈 얻기
     int updateMoneyByWalk(AnimalInfo animalInfo);
 
-    int updateMoneyByClinic(AnimalInfo animalInfo);
+    // 병원비용 차감
+    int updateByClinic(AnimalInfo animalInfo);
+
+    // 로그타임 업데이트
+    int updateLoginDate(AnimalInfo animalInfo);
+
+    // 시스템데이트 - 로그인데이트
+    int getDate(AnimalInfo animalInfo);
+
+    // 무지개별로 간 타마 삭제
+    int deleteTama(AnimalInfo animalInfo);
 }

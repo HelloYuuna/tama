@@ -13,10 +13,6 @@ create table PLAYER (
                         playerPwd varchar2(20) NOT NULL
 );
 
-insert into PLAYER
-values ('tama1','111');
-commit;
-
 create table animal_type (
                              typeSeq number(1) PRIMARY KEY ,
                              lifespan number NOT NULL ,
@@ -101,7 +97,3 @@ VALUES (food_seq.nextval, 3, '고양이용 습식캔', 150);
 insert into food (foodSeq, typeSeq, foodName, price)
 VALUES (food_seq.nextval, 3, '고양이용 건식사료', 100);
 
-update ANIMAL_INFO
-set money = '1000'
-where playerid = 'tama1';
-commit ;

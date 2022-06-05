@@ -5,7 +5,7 @@
 
 <mapper namespace="net.scit.tama.dao.AnimalInfoMapper">
     <select id="selectAnimalInfo" parameterType="String" resultType="AnimalInfo">
-        SELECT ANIMALNAME, TYPESEQ, PLAYERID,to_char(BIRTH,'YYYY-MM-DD') as BIRTH, CONDITION, MONEY, logindate
+        SELECT ANIMALNAME, TYPESEQ, PLAYERID,to_char(BIRTH,'YYYY-MM-DD') as BIRTH, CONDITION, MONEY, LOGINDATE
         FROM ANIMAL_INFO
         WHERE playerId = #{playerId}
     </select>
@@ -15,15 +15,32 @@
         VALUES (animal_seq.nextval, #{playerId}, #{typeSeq}, #{animalName})
     </insert>
 
+    <select id="getDate" parameterType="AnimalInfo" resultType="int">
+        SELECT trunc(sysdate-LOGINDATE)
+        FROM ANIMAL_INFO
+        WHERE playerId = #{playerId}
+    </select>
+
     <update id="updateMoneyByWalk" parameterType="AnimalInfo">
         UPDATE ANIMAL_INFO
         SET MONEY = #{money}
         WHERE PLAYERID = #{playerId}
     </update>
 
-    <update id="updateMoneyByClinic" parameterType="AnimalInfo">
+    <update id="updateByClinic" parameterType="AnimalInfo">
         UPDATE ANIMAL_INFO
         SET MONEY = #{money}, CONDITION = #{condition}
         WHERE PLAYERID = #{playerId}
     </update>
+
+    <update id="updateLoginDate" parameterType="AnimalInfo">
+        UPDATE ANIMAL_INFO
+        SET LOGINDATE = sysdate
+        WHERE PLAYERID = #{playerId}
+    </update>
+    
+    <delete id="deleteTama" parameterType="AnimalInfo">
+        DELETE ANIMAL_INFO
+        WHERE PLAYERID = #{playerId}
+    </delete>
 </mapper>

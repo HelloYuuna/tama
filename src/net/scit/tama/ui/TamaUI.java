@@ -1,8 +1,6 @@
 package net.scit.tama.ui;
 
-import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import net.scit.tama.dao.AnimalInfoDAO;
-import net.scit.tama.dao.AnimalInfoMapper;
 import net.scit.tama.dao.PlayerDAO;
 import net.scit.tama.vo.AnimalInfo;
 import net.scit.tama.vo.Player;
@@ -115,22 +113,33 @@ public class TamaUI {
     /**
      * 타마월드 입성 서브 메뉴시작
      * 타마가 없으면 새로 생성 있으면 데이터 가져옴
-     * 하루이상 로그인하지 않으면 상태가 나빠짐
+     * 하루이상 로그인하지 않으면 상태가 나빠짐 loginchk() 메소드
+     * 만약 로그인했을때 상태가 사망이라면 타마 생성부터 시작
      * @param playerId 플레이어 아이디로 타마를 찾음
      */
     private void intoTamaWorld(String playerId) {
         System.out.println("\n\t\\( > ㅅ < )/ WELECOME TO TAMA WORLD ☆.。.:*°☆.。");
         System.out.println("\t타마짱은 당신의 관심을 받고 자라납니다~");
 
-        // 타마 생성 (findById로 AnimalInfo 가져옴)
         AnimalInfo animalInfo = animalInfoDAO.selectAnimalInfo(playerId);
         if(animalInfo == null) {
             System.out.println("\n\n\t아직 등록된 타마가 없는것 같군요! \n\t새로운 타마를 만나러 떠나볼까요?");
             makeTama(playerId);
-            animalInfo = animalInfoDAO.selectAnimalInfo(playerId);                      // 데이터베이스의 default값 가져옴
+            animalInfo = animalInfoDAO.selectAnimalInfo(playerId);                                // 데이터베이스 다시 읽어들임
         }
 
-        // 타마 이어하기
+        /* 경과일 체크 */
+        loginChk(animalInfo);
+        /* 사망 상태 체크 */
+        deathChk(animalInfo);
+        animalInfo = animalInfoDAO.selectAnimalInfo(playerId);                                   // 데이터베이스 다시 읽어들임
+
+        /* 로그인 날짜 저장 */
+        int result = animalInfoDAO.updateLoginDate(animalInfo);
+        if(result != 1) {
+            System.out.println("\n\t예기치못한 문제가 발생했어요! 관리자에게 문의해주세요..!");
+        }
+
         System.out.println("\n\t----------------------------------------------");
         System.out.println("\t                현재 성장중인 타마");
         System.out.println("\t------------------------------------------------");
@@ -177,6 +186,80 @@ public class TamaUI {
     }
 
     /**
+     * 사망상태인지 체크
+     * 사망 상태라면 타마를 새로만들지 아닐지 판단
+     * @param animalInfo 현재 로그인 정보
+     */
+    private void deathChk(AnimalInfo animalInfo) {
+        String currCondition = animalInfo.getCondition();
+        if(currCondition.equals("사망")) {
+            System.out.println("\n\n\t당신의 관심을 받지 못해서 외로웠던 " + animalInfo.getAnimalName() + "는(은) 무지개별로 돌아갔답니다ㅠㅠ");
+            System.out.println("\t새로운 타마와 함께하시겠어요?");
+            System.out.println("\n\t1)새로운 타마를 찾아나설래요! 2)아니요 슬프니까 이만 갈래요..");
+            System.out.print("\t선택: ");
+            select = keyin.next();
+
+            if ("2".equals(select)) {
+                System.out.println("\n\t다음에 또 만나는 날을 기약하며 기다릴께요..!\n\t프로그램을 종료할께요");
+                System.exit(0);
+            } else if ("1".equals(select)) {
+                System.out.println("\n\t새로운 인연이 당신을 기다립니다~!");
+                int result = animalInfoDAO.deleteTama(animalInfo);
+                makeTama(animalInfo.getPlayerId());
+                if(result != 1) {
+                    System.out.println("\n\t예기치못한 문제가 발생했어요! 관리자에게 문의해주세요..!");
+                }
+            }
+        }
+    }
+
+    /**
+     * 로그인 체크
+     * 일정일 이상 로그인하지 않으면 상태가 나빠짐
+     * 좋음 > 보통 > 나쁨 > 병 > 사망
+     * @param animalInfo 현재 로그인 정보
+     */
+    private void loginChk(AnimalInfo animalInfo) {
+        int dateDiffr = animalInfoDAO.getDate(animalInfo);
+        String currCondition = animalInfo.getCondition();
+
+        int result;
+        if(dateDiffr <= 1) {
+            switch (currCondition) {
+                case "좋음":
+                    animalInfo.setCondition("보통");
+                    result = animalInfoDAO.updateByClinic(animalInfo);
+                    if(result != 1) {
+                        System.out.println("\n\t예기치못한 문제가 발생했어요! 관리자에게 문의해주세요..!");
+                    }
+                    break;
+                case "보통":
+                    animalInfo.setCondition("나쁨");
+                    result = animalInfoDAO.updateByClinic(animalInfo);
+                    if(result != 1) {
+                        System.out.println("\n\t예기치못한 문제가 발생했어요! 관리자에게 문의해주세요..!");
+                    }
+                    break;
+                case "나쁨":
+                    animalInfo.setCondition("병");
+                    result = animalInfoDAO.updateByClinic(animalInfo);
+                    if(result != 1) {
+                        System.out.println("\n\t예기치못한 문제가 발생했어요! 관리자에게 문의해주세요..!");
+                    }
+                    break;
+                case "병":
+                    animalInfo.setCondition("사망");
+                    result = animalInfoDAO.updateByClinic(animalInfo);
+                    if(result != 1) {
+                        System.out.println("\n\t예기치못한 문제가 발생했어요! 관리자에게 문의해주세요..!");
+                    }
+                    break;
+            }
+
+        }
+    }
+
+    /**
      * 현재 상태 체크 >> 혜인짱
      */
     private void conditionChk(AnimalInfo animalInfo) {
@@ -214,6 +297,10 @@ public class TamaUI {
 
     }
 
+    /**
+     * 병 치료
+     * @param animalInfo 현재 로그인
+     */
     private void treatmentIll(AnimalInfo animalInfo) {
         System.out.println("\n\t현재 [병] 상태예요. 치료하려면 500원이 차감됩니다.");
         System.out.println("\n\t1)치료하기 2)치료 안할래요");
@@ -222,15 +309,10 @@ public class TamaUI {
 
         if("2".equals(select)) {
             System.out.println("\n\t치료를 진행할게요~ 잠시만 기다려주세요...");
-            // Thread 추가 3초지연
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            slowTime();                                                             // Thread 추가 3초지연
             animalInfo.setCondition("좋음");
             animalInfo.setMoney(animalInfo.getMoney()-200);
-            int result = animalInfoDAO.updateMoneyByClinic(animalInfo);
+            int result = animalInfoDAO.updateByClinic(animalInfo);
             if(result == 1) {
                 System.out.println("\n\t치료가 완료되었어요! 즐거운 집으로 돌아갑니다");
             } else {
@@ -241,6 +323,10 @@ public class TamaUI {
         System.out.println("치료를 중단합니다");
     }
 
+    /**
+     * 나쁜 상태 치료
+     * @param animalInfo 현재 로그인 데이터
+     */
     private void treatmentBad(AnimalInfo animalInfo) {
         System.out.println("\n\t현재 [나쁜] 상태예요. 치료하려면 200원이 차감됩니다.");
         System.out.println("\n\t1)치료하기 2)치료 안할래요");
@@ -249,15 +335,10 @@ public class TamaUI {
 
         if ("1".equals(select)) {
             System.out.println("\n\t치료를 진행할게요~ 잠시만 기다려주세요...");
-            // Thread 추가 3초지연
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            slowTime();                                                             // Thread 추가 3초지연
             animalInfo.setCondition("좋음");
             animalInfo.setMoney(animalInfo.getMoney() - 200);
-            int result = animalInfoDAO.updateMoneyByClinic(animalInfo);
+            int result = animalInfoDAO.updateByClinic(animalInfo);
             if (result == 1) {
                 System.out.println("\n\t치료가 완료되었어요! 즐거운 집으로 돌아갑니다");
             } else {
@@ -295,8 +376,10 @@ public class TamaUI {
                     continue;
             }
 
-            // sleep 사용해서 천천히 ... 이 떨어지게
+            // 3초의 시간이 흐름
+            slowTime();
 
+            // 랜덤으로 돈을 범
             Random random = new Random();
             char randomtxt = (char) (random.nextInt(26) + 'a'); // a + 26까지
 //            System.out.println("Generated Random Character: " + randomtxt);
@@ -315,6 +398,24 @@ public class TamaUI {
             return;
         }
 
+    }
+
+    private void slowTime() {
+        int limitTime = 0;
+        while(true) {
+            try {
+                System.out.println(".");
+                Thread.sleep(1000);
+                limitTime++;
+
+                if(limitTime >= 3) {
+                    break;
+                }
+            }
+            catch(InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
@@ -378,8 +479,7 @@ public class TamaUI {
             }
 
             System.out.println("\t자, 이제 당신의 " + type + " " + name + "랑 함께 놀아볼까요?");
-            // 타마 월드로 돌아감
-            return;
+            return;                                                                      // 타마 월드로 돌아감
         }
     }
 }

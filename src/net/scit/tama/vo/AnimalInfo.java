@@ -96,6 +96,6 @@ public class AnimalInfo {
 
     @Override
     public String toString() {
-        return String.format("%s  생일:%s, 상태:%s, 소지금:%,d원", animalName, birth, condition, money);
+        return String.format("%s - 생일:%s, 상태:%s, 소지금:%,d원", animalName, birth, condition, money);
     }
 }
