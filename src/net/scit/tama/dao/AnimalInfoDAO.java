@@ -49,4 +49,18 @@ public class AnimalInfoDAO {
 
         session.rollback();
     }
+
+    public int updateMoneyByClinic(AnimalInfo animalInfo) {
+        SqlSession session = factory.openSession();
+        AnimalInfoMapper mapper = session.getMapper(AnimalInfoMapper.class);
+
+        int result = mapper.updateMoneyByClinic(animalInfo);
+        if(result == 1) {
+            session.commit();
+            return 1;
+        }
+
+        session.rollback();
+        return 0;
+    }
 }

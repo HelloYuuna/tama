@@ -23,4 +23,6 @@ public interface AnimalInfoMapper {
 
     // 산책으로 돈 얻기
     int updateMoneyByWalk(AnimalInfo animalInfo);
+
+    int updateMoneyByClinic(AnimalInfo animalInfo);
 }

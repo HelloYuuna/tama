@@ -5,7 +5,7 @@
 
 <mapper namespace="net.scit.tama.dao.AnimalInfoMapper">
     <select id="selectAnimalInfo" parameterType="String" resultType="AnimalInfo">
-        SELECT ANIMALNAME, to_char(BIRTH,'YYYY-MM-DD') as BIRTH, trunc(sysdate-BIRTH) || '일 성장중' as 성장일, CONDITION, MONEY
+        SELECT ANIMALNAME, TYPESEQ, PLAYERID,to_char(BIRTH,'YYYY-MM-DD') as BIRTH, CONDITION, MONEY, logindate
         FROM ANIMAL_INFO
         WHERE playerId = #{playerId}
     </select>
@@ -18,6 +18,12 @@
     <update id="updateMoneyByWalk" parameterType="AnimalInfo">
         UPDATE ANIMAL_INFO
         SET MONEY = #{money}
+        WHERE PLAYERID = #{playerId}
+    </update>
+
+    <update id="updateMoneyByClinic" parameterType="AnimalInfo">
+        UPDATE ANIMAL_INFO
+        SET MONEY = #{money}, CONDITION = #{condition}
         WHERE PLAYERID = #{playerId}
     </update>
 </mapper>

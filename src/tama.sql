@@ -41,7 +41,8 @@ create table ANIMAL_INFO (
                              typeSeq number(1) REFERENCES animal_type(typeSeq) on delete cascade ,
                              animalName varchar2(30) NOT NULL ,
                              condition varchar2(10) default '보통' CHECK (condition in('좋음','보통','나쁨','병','사망')) ,
-                             money number DEFAULT 1000
+                             money number DEFAULT 1000 not null ,
+                             logindate date default sysdate not null
 );
 create sequence animal_seq;
 
@@ -99,3 +100,8 @@ VALUES (food_seq.nextval, 3, '고양이용 습식캔', 150);
 
 insert into food (foodSeq, typeSeq, foodName, price)
 VALUES (food_seq.nextval, 3, '고양이용 건식사료', 100);
+
+update ANIMAL_INFO
+set money = '1000'
+where playerid = 'tama1';
+commit ;

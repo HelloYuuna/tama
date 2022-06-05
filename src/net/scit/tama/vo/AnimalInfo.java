@@ -14,19 +14,21 @@ public class AnimalInfo {
     private String animalName;
     private String condition;
     private int money;
+    private String logindate;
 
     public AnimalInfo() {
     }
 
-    public AnimalInfo(int animalSeq, int typeSeq, String playerId, String birth, String animalName, String condition, int money) {
-        this.animalSeq = animalSeq;
-        this.typeSeq = typeSeq;
-        this.playerId = playerId;
-        this.birth = birth;
-        this.animalName = animalName;
-        this.condition = condition;
-        this.money = money;
-    }
+//    public AnimalInfo(int animalSeq, int typeSeq, String playerId, String birth, String animalName, String condition, int money, String logindate) {
+//        this.animalSeq = animalSeq;
+//        this.typeSeq = typeSeq;
+//        this.playerId = playerId;
+//        this.birth = birth;
+//        this.animalName = animalName;
+//        this.condition = condition;
+//        this.money = money;
+//        this.logindate = logindate;
+//    }
 
     public int getAnimalSeq() {
         return animalSeq;
@@ -84,8 +86,16 @@ public class AnimalInfo {
         this.money = money;
     }
 
+    public String getLogindate() {
+        return logindate;
+    }
+
+    public void setLogindate(String logindate) {
+        this.logindate = logindate;
+    }
+
     @Override
     public String toString() {
-        return String.format("%s  태어난날:%s, 상태:%s, 소지금:%,d원", animalName, birth, condition, money);
+        return String.format("%s  생일:%s, 상태:%s, 소지금:%,d원", animalName, birth, condition, money);
     }
 }
