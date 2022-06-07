@@ -475,39 +475,6 @@ public class TamaUI {
 
         } else if(type == dog) {
             feedToDog(animalInfo, currMoney, dogFoodList, tamaName);
-//            System.out.println("\t사랑스러운 "+animalInfo.getAnimalName()+" 전용 먹이를 골라주세요~!");
-//            System.out.println();
-//
-//            foodList = foodList.subList(5, 10);
-//            foodList.forEach(x -> System.out.println("\t"+x));
-//
-//            System.out.print("\t선택 : ");
-//            select = keyin.next();
-//            switch (select) {
-//                case "1":
-//                    System.out.println("\n\t맛있는~ 딸기~");
-//                    animalInfo.setMoney(animalInfo.getMoney()-70);
-//                    break;
-//                case "2":
-//                    System.out.println("\n\t맛있는~ 감말랭이~");
-//                    animalInfo.setMoney(animalInfo.getMoney()-30);
-//                    break;
-//                case "3":
-//                    System.out.println("\n\t맛있는~ 저키~");
-//                    animalInfo.setMoney(animalInfo.getMoney()-50);
-//                    break;
-//                case "4":
-//                    System.out.println("\n\t맛있는~ 강아지용 습신캔~");
-//                    animalInfo.setMoney(animalInfo.getMoney()-150);
-//                    break;
-//                case "5":
-//                    System.out.println("\n\t맛있는~ 강아지용 건식사료~");
-//                    animalInfo.setMoney(animalInfo.getMoney()-100);
-//                    break;
-//                default:
-//                    System.out.println("\n\t잘못된 선택이예요! 메뉴를 다시 선택해주세요~");
-//                    return;
-//            }
 
         } else if(type == cat) {
             feedToCat(animalInfo, currMoney, catFoodList, tamaName);
