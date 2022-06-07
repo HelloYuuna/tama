@@ -43,4 +43,10 @@
         DELETE ANIMAL_INFO
         WHERE PLAYERID = #{playerId}
     </delete>
+
+    <update id="feedByFood" parameterType="AnimalInfo">
+        UPDATE ANIMAL_INFO
+        SET MONEY = #{money}, CONDITION = #{condition}
+        WHERE PLAYERID = #{playerId}
+    </update>
 </mapper>
