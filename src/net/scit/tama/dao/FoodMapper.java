@@ -8,12 +8,13 @@ package net.scit.tama.dao;
  */
 
 
+import net.scit.tama.vo.Food;
+import java.util.List;
 
 /**
  * Mapper XML의 SQL문 사용 메서드
  */
 
 public interface FoodMapper {
-    // 단어 추가
-
+        List<Food> listFood();
 }

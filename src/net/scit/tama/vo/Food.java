@@ -56,6 +56,6 @@ public class Food {
 
     @Override
     public String toString() {
-        return foodSeq + " : " + foodName + " (" + price + "원)";
+        return foodName + " (" + price + "원)";
     }
 }

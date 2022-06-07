@@ -35,4 +35,7 @@ public interface AnimalInfoMapper {
 
     // 무지개별로 간 타마 삭제
     int deleteTama(AnimalInfo animalInfo);
+
+    // 돈주고 먹을거 사기
+    int feedByFood(AnimalInfo animalInfo);
 }

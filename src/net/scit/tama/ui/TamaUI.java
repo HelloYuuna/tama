@@ -261,7 +261,6 @@ public class TamaUI {
                     }
                     break;
             }
-
         }
     }
 
@@ -273,7 +272,6 @@ public class TamaUI {
         System.out.println("\t" + animalInfo.getAnimalName() + "의 현재 상태");
         System.out.println("\t------------------------------------------------");
         System.out.println("\t" + animalInfo);
-
     }
 
     /**
@@ -305,7 +303,7 @@ public class TamaUI {
 
     /**
      * 병 치료
-     * @param animalInfo 현재 로그인
+     * @param animalInfo 현재 로그인 데이터
      */
     private void treatmentIll(AnimalInfo animalInfo) {
         System.out.println("\n\t현재 [병] 상태예요. 치료하려면 500원이 차감됩니다.");
@@ -326,6 +324,7 @@ public class TamaUI {
             }
             return;
         }
+
         System.out.println("치료를 중단합니다");
     }
 
@@ -357,6 +356,7 @@ public class TamaUI {
 
     /**
      * 산책하기
+     * @param animalInfo 현재 로그인 데이터
      */
     private void walk(AnimalInfo animalInfo) {
         System.out.println("\n\n\t" + animalInfo.getAnimalName() + "과 즐거운 산책을 떠나보아요!");
@@ -369,13 +369,13 @@ public class TamaUI {
 
             switch (select) {
                 case "1":
-                    System.out.println("\n\t당신은" + animalInfo.getAnimalName() + "랑 공원에서 즐거운 산책중인데… ");
+                    System.out.println("\n\t당신은 " + animalInfo.getAnimalName() + "랑 공원에서 즐거운 산책중인데… ");
                     break;
                 case "2":
-                    System.out.println("\n\t당신은" + animalInfo.getAnimalName() + "랑 한강에서 행복한 산책중인데…");
+                    System.out.println("\n\t당신은 " + animalInfo.getAnimalName() + "랑 한강에서 행복한 산책중인데…");
                     break;
                 case "3":
-                    System.out.println("\n\t당신은" + animalInfo.getAnimalName() + "랑 힘겨운 등반중에 있는데… ");
+                    System.out.println("\n\t당신은 " + animalInfo.getAnimalName() + "랑 힘겨운 등반중에 있는데… ");
                     break;
                 default:
                     System.out.println("\n\t잘못된 선택이예요! 메뉴를 다시 선택해주세요~");
@@ -385,10 +385,8 @@ public class TamaUI {
             // 3초의 시간이 흐름
             slowTime();
 
-            // 랜덤으로 돈을 범
             Random random = new Random();
-            char randomtxt = (char) (random.nextInt(26) + 'a'); // a + 26까지
-//            System.out.println("Generated Random Character: " + randomtxt);
+            char randomtxt = (char) (random.nextInt(26) + 'a'); // a + 26까지 문자 생성
 
             int money;
             if(randomtxt == 'a' || randomtxt == 'b' || randomtxt == 'c' ) {
@@ -410,7 +408,7 @@ public class TamaUI {
         int limitTime = 0;
         while(true) {
             try {
-                System.out.println(".");
+                System.out.println("\t.");
                 Thread.sleep(1000);
                 limitTime++;
 
@@ -425,147 +423,177 @@ public class TamaUI {
     }
 
     /**
-     * 먹이주기 >> 혜인짱
+     * 먹이주기
      */
     private void feed(AnimalInfo animalInfo) {
-//        Food food = new Food();
-//        int type = animalInfo.getTypeSeq();
-//        List<Food> foodList = foodDao.listFood();
-//        String currCondition = animalInfo.getCondition();
-//        String tamaName = animalInfo.getAnimalName();
-//
-//        if(("병".equals(currCondition))) {
-//            System.out.println("우리 " + tamaName + "는 지금 병원에 가야해요 ㅠㅠ");
-//            treatmentIll(animalInfo);
-//            return;
-//        }
-//
-//        System.out.println("\n\n\t" + ":♡.•♬✧+:•*∴꼬르륵 :♡.•♬✧+:•*∴");
-//        System.out.println("\n\n\t" + "저런, 배고픈 " + tamaName + "에게 먹이를 주러 가볼까요?");
-//
-//
-//        if(type == 1) {
-//            feedToParrot(foodList, tamaName);
-//            System.out.println("\t화려한 "+ tamaName + "의 전용 먹이를 골라주세요~!");
-//            System.out.println();
-//
-//            foodList = foodList.subList(0, 5);
-//            foodList.forEach(x -> System.out.println("\t" + x));
-//
-//            System.out.println();
-//            System.out.print("\t선택 : ");
-//            select = keyin.next();
-//
-//            switch (select) {
-//                case "1":
-//                    System.out.println("\n\t맛있는~ 해바라기씨~");
-//                    animalInfo.setMoney(animalInfo.getMoney() - 20);
-//                    break;
-//                case "2":
-//                    System.out.println("\n\t맛있는~ 기장~");
-//                    animalInfo.setMoney(animalInfo.getMoney() - 10);
-//                    break;
-//                case "3":
-//                    System.out.println("\n\t맛있는~ 쌀밥~");
-//                    animalInfo.setMoney(animalInfo.getMoney() - 30);
-//                    break;
-//                case "4":
-//                    System.out.println("\n\t맛있는~ 홍화씨~");
-//                    animalInfo.setMoney(animalInfo.getMoney() - 50);
-//                    break;
-//                case "5":
-//                    System.out.println("\n\t맛있는~ 바나나~");
-//                    animalInfo.setMoney(animalInfo.getMoney() - 100);
-//                    break;
-//                default:
-//                    System.out.println("\n\t잘못된 선택이예요! 메뉴를 다시 선택해주세요~");
-//                    return;
-//            }
-//        }
-//        else if(type == 2) {
-//            System.out.println("\t사랑스러운 "+animalInfo.getAnimalName()+" 전용 먹이를 골라주세요~!");
-//            System.out.println();
-//
-//            list = list.subList(5, 10);
-//            list.forEach(x -> System.out.println("\t" + x));
-//
-//            System.out.print("\t선택 : ");
-//            select = keyin.next();
-//            switch (select) {
-//                case "1":
-//                    System.out.println("\n\t맛있는~ 딸기~");
-//                    animalInfo.setMoney(animalInfo.getMoney() - 70);
-//                    break;
-//                case "2":
-//                    System.out.println("\n\t맛있는~ 감말랭이~");
-//                    animalInfo.setMoney(animalInfo.getMoney() - 30);
-//                    break;
-//                case "3":
-//                    System.out.println("\n\t맛있는~ 저키~");
-//                    animalInfo.setMoney(animalInfo.getMoney() - 50);
-//                    break;
-//                case "4":
-//                    System.out.println("\n\t맛있는~ 강아지용 습신캔~");
-//                    animalInfo.setMoney(animalInfo.getMoney() - 150);
-//                    break;
-//                case "5":
-//                    System.out.println("\n\t맛있는~ 강아지용 건식사료~");
-//                    animalInfo.setMoney(animalInfo.getMoney() - 100);
-//                    break;
-//                default:
-//                    System.out.println("\n\t잘못된 선택이예요! 메뉴를 다시 선택해주세요~");
-//                    return;
-//            }
-//
-//        }
-//        else if(type == 3) {
-//            System.out.println("\t신비스러운 "+animalInfo.getAnimalName()+" 전용 먹이를 골라주세요~!");
-//            System.out.println();
-//
-//            list = list.subList(10, 15);
-//            list.forEach(x -> System.out.println("\t"+x));
-//
-//            System.out.print("\t선택 : ");
-//            select = keyin.next();
-//
-//            switch (select) {
-//                case "1":
-//                    System.out.println("\n\t맛있는~ 츄르~");
-//                    animalInfo.setMoney(animalInfo.getMoney() - 10);
-//                    break;
-//                case "2":
-//                    System.out.println("\n\t맛있는~ 닭가슴살(생식)~");
-//                    animalInfo.setMoney(animalInfo.getMoney() - 80);
-//                    break;
-//                case "3":
-//                    System.out.println("\n\t맛있는~ 북어트릿~");
-//                    animalInfo.setMoney(animalInfo.getMoney() -20);
-//                    break;
-//                case "4":
-//                    System.out.println("\n\t맛있는~ 고양이용 습식캔~");
-//                    animalInfo.setMoney(animalInfo.getMoney() - 150);
-//                    break;
-//                case "5":
-//                    System.out.println("\n\t맛있는~ 고양이용 건식사료~");
-//                    animalInfo.setMoney(animalInfo.getMoney() - 100);
-//                    break;
-//                default:
-//                    System.out.println("\n\t잘못된 선택이예요! 메뉴를 다시 선택해주세요~");
-//                    return;
-//            }
-//        }
-//
-//        if (("좋음".equals(currCondition)) || ("보통".equals(currCondition))) {
-//            animalInfo.setCondition("좋음");
-//        }
-//        else if(("나쁨".equals(currCondition))) {
-//            animalInfo.setCondition("보통");
-//        }
-//        System.out.println("ﾟ☆☆°・*:. 。.☆냠 냠☆.。.:*・°☆☆ﾟ");
-//        slowTime();
-//        System.out.println("\t행복해진 " + animalInfo.getAnimalName() + "짱♥*♡");
-//
-//        return;
+        String currCondition = animalInfo.getCondition();
+        String tamaName = animalInfo.getAnimalName();
+
+        if(("병".equals(currCondition))) {
+            System.out.println("우리 " + tamaName + "는 지금 병원에 가야해요 ㅠㅠ");
+            treatmentIll(animalInfo);
+            return;
+        }
+
+        System.out.println("\n\n\t" + ":♡.•♬✧+:•*∴꼬르륵 :♡.•♬✧+:•*∴");
+        System.out.println("\n\n\t" + "저런, 배고픈 " + tamaName + "에게 먹이를 주러 가볼까요?");
+
+        int type = animalInfo.getTypeSeq();
+        List<Food> foodList = foodDao.listFood();
+        int currMoney = animalInfo.getMoney();
+        if(type == 1) {                                                                     // 앵무새 먹이
+            feedToParrot(animalInfo, currMoney, foodList, tamaName);
+
+        } else if(type == 2) {                                                                // 강아지 먹이
+            feedToDog(animalInfo, currMoney, foodList, tamaName);
+
+        } else if(type == 3) {                                                                // 고양이 먹이
+            feedToCat(animalInfo, currMoney, foodList, tamaName);
+        }
+
+        if (("좋음".equals(currCondition)) || ("보통".equals(currCondition))) {
+            animalInfo.setCondition("좋음");
+
+        } else if (("나쁨".equals(currCondition))) {
+            animalInfo.setCondition("보통");
+        }
+
+        int result = animalInfoDAO.feedByFood(animalInfo);
+        if (result != 1) {
+            System.out.println("\t알 수 없는 외부의 힘이 작용했어요..! \n자세한 사항은 관리자에게 문의해주세요");
+            return;
+        }
+
+        System.out.println("☆☆°*:. 。.☆냠 냠☆.。.:*°☆☆");
+        slowTime();
+        System.out.println("\t행복해진 " + tamaName + "짱♥*♡");
+    }
+
+    private void feedToCat(AnimalInfo animalInfo, int currMoney, List<Food> foodList, String tamaName) {
+        while (true) {
+            System.out.println("\t신비스러운 " + tamaName + " 전용 먹이를 골라주세요~!");
+            System.out.println();
+
+            foodList = foodList.subList(10, 15);
+            foodList.forEach(x -> System.out.println("\t" + x));
+
+            System.out.print("\t선택 : ");
+            select = keyin.next();
+
+            switch (select) {
+                case "1":
+                    System.out.println("\n\t맛있는~ 츄르~");
+                    animalInfo.setMoney(currMoney - 10);
+                    break;
+                case "2":
+                    System.out.println("\n\t맛있는~ 닭가슴살(생식)~");
+                    animalInfo.setMoney(currMoney - 80);
+                    break;
+                case "3":
+                    System.out.println("\n\t맛있는~ 북어트릿~");
+                    animalInfo.setMoney(currMoney - 20);
+                    break;
+                case "4":
+                    System.out.println("\n\t맛있는~ 고양이용 습식캔~");
+                    animalInfo.setMoney(currMoney - 150);
+                    break;
+                case "5":
+                    System.out.println("\n\t맛있는~ 고양이용 건식사료~");
+                    animalInfo.setMoney(currMoney - 100);
+                    break;
+                default:
+                    System.out.println("\n\t잘못된 선택이예요! 메뉴를 다시 선택해주세요~");
+            }
+        }
+    }
+
+    /**
+     * 2.강아지에게 먹이주기
+     * @param animalInfo 현재 로그인 계정
+     * @param foodList 먹이 데이터
+     * @param tamaName 타마이름 데이터
+     */
+    private void feedToDog(AnimalInfo animalInfo, int currMoney, List<Food> foodList, String tamaName) {
+        while (true) {
+            System.out.println("\t사랑스러운 " + tamaName + " 전용 먹이를 골라주세요~!");
+            System.out.println();
+
+            foodList = foodList.subList(5, 10);
+            foodList.forEach(x -> System.out.println("\t" + x));
+
+            System.out.print("\t선택 : ");
+            select = keyin.next();
+            switch (select) {
+                case "1":
+                    System.out.println("\n\t맛있는~ 딸기~");
+                    animalInfo.setMoney(currMoney - 70);
+                    break;
+                case "2":
+                    System.out.println("\n\t맛있는~ 감말랭이~");
+                    animalInfo.setMoney(currMoney - 30);
+                    break;
+                case "3":
+                    System.out.println("\n\t맛있는~ 저키~");
+                    animalInfo.setMoney(currMoney - 50);
+                    break;
+                case "4":
+                    System.out.println("\n\t맛있는~ 강아지용 습신캔~");
+                    animalInfo.setMoney(currMoney - 150);
+                    break;
+                case "5":
+                    System.out.println("\n\t맛있는~ 강아지용 건식사료~");
+                    animalInfo.setMoney(currMoney - 100);
+                    break;
+                default:
+                    System.out.println("\n\t잘못된 선택이예요! 메뉴를 다시 선택해주세요~");
+            }
+        }
+
+    }
+
+    /**
+     * 1.앵무새에게 먹이주기
+     * @param animalInfo 현재 로그인 계정
+     * @param foodList 먹이 데이터
+     * @param tamaName 타마이름 데이터
+     */
+    private void feedToParrot(AnimalInfo animalInfo, int currMoney, List<Food> foodList, String tamaName) {
+        while (true) {
+            System.out.println("\t화려한 " + tamaName + "의 전용 먹이를 골라주세요~!");
+            System.out.println();
+
+            foodList = foodList.subList(0, 5);
+            foodList.forEach(x -> System.out.println("\t" + x));
+
+            System.out.println();
+            System.out.print("\t선택 : ");
+            select = keyin.next();
+
+            switch (select) {
+                case "1":
+                    System.out.println("\n\t맛있는~ 해바라기씨~");
+                    animalInfo.setMoney(currMoney - 20);
+                    break;
+                case "2":
+                    System.out.println("\n\t맛있는~ 기장~");
+                    animalInfo.setMoney(currMoney - 10);
+                    break;
+                case "3":
+                    System.out.println("\n\t맛있는~ 쌀밥~");
+                    animalInfo.setMoney(currMoney - 30);
+                    break;
+                case "4":
+                    System.out.println("\n\t맛있는~ 홍화씨~");
+                    animalInfo.setMoney(currMoney - 50);
+                    break;
+                case "5":
+                    System.out.println("\n\t맛있는~ 바나나~");
+                    animalInfo.setMoney(currMoney - 100);
+                    break;
+                default:
+                    System.out.println("\n\t잘못된 선택이예요! 메뉴를 다시 선택해주세요~");
+            }
+        }
     }
 
 //    }

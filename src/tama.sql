@@ -97,6 +97,8 @@ VALUES (food_seq.nextval, 3, '고양이용 습식캔', 150);
 insert into food (foodSeq, typeSeq, foodName, price)
 VALUES (food_seq.nextval, 3, '고양이용 건식사료', 100);
 
-delete ANIMAL_INFO
-where PLAYERID = 'tama1';
+update FOOD
+set foodName = '1.강아지용 건식사료'
+where foodSeq = '11';
+
 commit ;

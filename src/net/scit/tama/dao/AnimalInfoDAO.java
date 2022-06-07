@@ -98,4 +98,17 @@ public class AnimalInfoDAO {
         session.rollback();
         return 0;
     }
+
+    public int feedByFood(AnimalInfo animalInfo) {
+        SqlSession session = factory.openSession();
+        AnimalInfoMapper mapper = session.getMapper(AnimalInfoMapper.class);
+
+        int result = mapper.feedByFood(animalInfo);
+        if(result == 1) {
+            session.commit();
+            return 1;
+        }
+        session.rollback();
+        return 0;
+    }
 }
