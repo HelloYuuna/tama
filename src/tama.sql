@@ -16,9 +16,6 @@ create table animal_type (
                              lifespan number NOT NULL ,
                              species char(10) CHECK (species in ('앵무새', '강아지', '고양이'))
 );
-alter table animal_type
-MODIFY species char(10);
-
 create sequence type_seq;
 
 insert into animal_type
@@ -47,8 +44,6 @@ create table food (
                       price number NOT NULL
 );
 create sequence food_seq;
-
-select * from food;
 
 insert into food (foodSeq, typeSeq, foodName, price)
 VALUES (food_seq.nextval, 1, '1.해바라기씨', 20);
