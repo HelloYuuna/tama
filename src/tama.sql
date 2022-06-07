@@ -6,8 +6,6 @@ drop sequence type_seq;
 drop table food;
 drop sequence food_seq;
 
-select * from PLAYER;
-
 create table PLAYER (
                         playerId varchar2(30) PRIMARY KEY ,
                         playerPwd varchar2(20) NOT NULL
@@ -50,55 +48,49 @@ create table food (
 );
 create sequence food_seq;
 
-select * from ANIMAL_INFO;
+select * from food;
 
 insert into food (foodSeq, typeSeq, foodName, price)
-VALUES (food_seq.nextval, 1, '해바라기씨', 20);
+VALUES (food_seq.nextval, 1, '1.해바라기씨', 20);
 
 insert into food (foodSeq, typeSeq, foodName, price)
-VALUES (food_seq.nextval, 1, '기장', 10);
+VALUES (food_seq.nextval, 1, '2.기장', 10);
 
 insert into food (foodSeq, typeSeq, foodName, price)
-VALUES (food_seq.nextval, 1, '쌀밥', 30);
+VALUES (food_seq.nextval, 1, '3.쌀밥', 30);
 
 insert into food (foodSeq, typeSeq, foodName, price)
-VALUES (food_seq.nextval, 1, '홍화씨', 50);
+VALUES (food_seq.nextval, 1, '4.홍화씨', 50);
 
 insert into food (foodSeq, typeSeq, foodName, price)
-VALUES (food_seq.nextval, 1, '바나나', 100);
+VALUES (food_seq.nextval, 1, '5.바나나', 100);
 
 insert into food (foodSeq, typeSeq, foodName, price)
-VALUES (food_seq.nextval, 2, '딸기', 70);
+VALUES (food_seq.nextval, 2, '1.딸기', 70);
 
 insert into food (foodSeq, typeSeq, foodName, price)
-VALUES (food_seq.nextval, 2, '감말랭이', 30);
+VALUES (food_seq.nextval, 2, '2.감말랭이', 30);
 
 insert into food (foodSeq, typeSeq, foodName, price)
-VALUES (food_seq.nextval, 2, '저키', 50);
+VALUES (food_seq.nextval, 2, '3.저키', 50);
 
 insert into food (foodSeq, typeSeq, foodName, price)
-VALUES (food_seq.nextval, 2, '강아지용 습신캔', 150);
+VALUES (food_seq.nextval, 2, '4.강아지용 습신캔', 150);
 
 insert into food (foodSeq, typeSeq, foodName, price)
-VALUES (food_seq.nextval, 2, '강아지용 건식사료', 100);
+VALUES (food_seq.nextval, 2, '5.강아지용 건식사료', 100);
 
 insert into food (foodSeq, typeSeq, foodName, price)
-VALUES (food_seq.nextval, 3, '츄르', 10);
+VALUES (food_seq.nextval, 3, '1.츄르', 10);
 
 insert into food (foodSeq, typeSeq, foodName, price)
-VALUES (food_seq.nextval, 3, '닭가슴살(생식)', 80);
+VALUES (food_seq.nextval, 3, '2.닭가슴살(생식)', 80);
 
 insert into food (foodSeq, typeSeq, foodName, price)
-VALUES (food_seq.nextval, 3, '북어트릿', 20);
+VALUES (food_seq.nextval, 3, '3.북어트릿', 20);
 
 insert into food (foodSeq, typeSeq, foodName, price)
-VALUES (food_seq.nextval, 3, '고양이용 습식캔', 150);
+VALUES (food_seq.nextval, 3, '4.고양이용 습식캔', 150);
 
 insert into food (foodSeq, typeSeq, foodName, price)
-VALUES (food_seq.nextval, 3, '고양이용 건식사료', 100);
-
-update FOOD
-set foodName = '1.강아지용 건식사료'
-where foodSeq = '11';
-
-commit ;
+VALUES (food_seq.nextval, 3, '5.고양이용 건식사료', 100);

@@ -623,7 +623,7 @@ public class TamaUI {
                     break;
                 case "3":
                     System.out.println("\n\t당신은 신비스러운 고양이에게 간택당했습니다!!!");
-                    createAnimal.setTypeSeq(2);
+                    createAnimal.setTypeSeq(3);
                     break;
                 default:
                     System.out.println("\n\t다른 종류는 준비중이예요 :) \n1~3번 사이에서 골라주세요!");
