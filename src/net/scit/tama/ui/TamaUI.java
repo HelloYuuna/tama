@@ -95,7 +95,7 @@ public class TamaUI {
 
         if (player == null) {
             System.out.println("비밀번호가 틀렸어요~!! \n인생은 한번뿐이예요.. 프로그램을 종료합니다.");
-            return;
+            System.exit(0);
         }
 
         intoTamaWorld(playerId); // 타마월드 입성
@@ -235,7 +235,7 @@ public class TamaUI {
         String currCondition = animalInfo.getCondition();
 
         int result;
-        if(dateDiffr > 0 && dateDiffr <= 2) {
+        if(dateDiffr >= 1) {
             switch (currCondition) {
                 case "좋음":
                     animalInfo.setCondition("보통");
@@ -454,6 +454,7 @@ public class TamaUI {
         if(("병".equals(currCondition))) {
             System.out.println("우리 "+ tamaName + "는 지금 병원에 가야해요 ㅠㅠ");
             treatmentIll(animalInfo);
+            return;
         }
 
         System.out.println("\n\t" + ":♡.•♬✧+:•*∴꼬르륵 :♡.•♬✧+:•*∴");

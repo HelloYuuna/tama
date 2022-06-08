@@ -89,3 +89,11 @@ VALUES (food_seq.nextval, 3, '4.고양이용 습식캔', 150);
 
 insert into food (foodSeq, typeSeq, foodName, price)
 VALUES (food_seq.nextval, 3, '5.고양이용 건식사료', 100);
+
+update ANIMAL_INFO
+set logindate = '2022-06-06'
+where playerId = 'hello';
+
+commit ;
+
+select * from animal_info;
