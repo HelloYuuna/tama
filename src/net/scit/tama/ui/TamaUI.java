@@ -308,7 +308,7 @@ public class TamaUI {
         }
 
         int currMoney = animalInfo.getMoney();
-        if (currMoney < 200) {
+        if (currMoney < 500) {
             System.out.println("현재 소지금: " + currMoney);
             System.out.println("\t현재 소지하신 금액이 너무 적어서 병원에 갈 수 없어요 ㅠㅠ ");
             return;
